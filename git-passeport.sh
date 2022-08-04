@@ -10,8 +10,9 @@ REPO_PATH="$(eval "echo $ARGS")" # TODO: replace unsafe eval
 ALLOWED_REPOS="$@"
 
 IS_ALLOWED=false
+echo "gitsh: repos you have access to: $ALLOWED_REPOS" >&2
 for repo in $ALLOWED_REPOS; do
-    #echo "$repo > $ALLOWED_REPOS : $REPO_PATH" >&2 # uncomment for debugging
+    #echo "$repo > $ALLOWED_REPOS : $REPO_PATH" >&2
     if [[ "$REPO_PATH" == "$repo" ]]; then
         IS_ALLOWED=true
         break
