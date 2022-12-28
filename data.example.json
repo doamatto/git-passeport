@@ -1,0 +1,15 @@
+{
+	"users": [
+		{
+			"name": "doa",
+			"keys": [ ... ],
+		}, {
+			"name": "dan",
+			"keys": [ ... ],
+		},
+	],
+	"userAccess": {
+		"doa": [ ... ],
+		"dan": [ ... ]
+	}
+}

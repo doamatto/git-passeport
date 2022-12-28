@@ -6,23 +6,18 @@ if ! [[ "$SSH_ORIGINAL_COMMAND" == git-upload-pack\ * || "$SSH_ORIGINAL_COMMAND"
 fi
 
 ARGS="${SSH_ORIGINAL_COMMAND#git-* }"
-REPO_PATH="$(eval "echo $ARGS")" # TODO: replace unsafe eval
-ALLOWED_REPOS="$@"
+echo "Authenticating as $USER..."
+eval "USER=$USER REPO=$ARGS ./applet" # $ARGS is the REPO_PATH
 
-IS_ALLOWED=false
-echo "gitsh: repos you have access to: $ALLOWED_REPOS" >&2
-for repo in $ALLOWED_REPOS; do
-    #echo "$repo > $ALLOWED_REPOS : $REPO_PATH" >&2
-    if [[ "$REPO_PATH" == "$repo" ]]; then
-        IS_ALLOWED=true
-        break
-    fi
-done
-
-if [[ $IS_ALLOWED == "false" ]]; then
+if [ $? == 0 ];
+    break;
+elif [ $? == 2 ];
+    echo "gitsh: You don't have permission to use this server."
+    exit 2
+else;
     echo "gitsh: Your SSH key does not have permission to access this repository," >&2
     echo "gitsh: or you are trying to access a repository that does not exist." >&2
     exit 1
-fi
+fi;
 
 eval "$SSH_ORIGINAL_COMMAND"
