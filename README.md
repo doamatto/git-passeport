@@ -1,3 +1,6 @@
+| :exclamation:  [This repository is now maintained on Sourcehut here.](https://git.sr.ht/~maatt/git-passeport)   |
+|-----------------------------------------------------------------------------------------------------------------|
+
 ## Usage
 1. Add `git-passeport.sh` to your server and make it executable (`chmod +x git-passeport.sh`)
 2. Build `app.go` (`go build applet.go`)
